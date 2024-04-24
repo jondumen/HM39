@@ -2,6 +2,10 @@
 
 {% extends "hm_app/base.html" %}
 {% load static %}
+
+{% block title %}Productores - Crypton Future Media{% endblock %}
+{% block nav_producers_active %}active{% endblock %}
+
 {% block body_block %}
 
 <!--
@@ -16,65 +20,82 @@
 </head>
 <body>
 -->
-
-    <h1>Miku Miku</h1>
-    
-
-    <p>Lo TQM Rubio 💟</p>
-    {{ username }}
-    <br/>
-    <img src="https://preview.redd.it/rabbit-hole-miku-v0-sbm4fzo62dmc1.png?width=640&crop=smart&auto=webp&s=4e7583a219f5b545c59990733de531d61a8e2ae5" alt="Rabbit Hole Miku WEB" width="15%" height="30%">
-    <img src="{% static 'rhmh.jpg' %}" alt="Rabbit Hole Miku Static" width="11%" height="16%" />
-    <img src="{% static 'images/rhmpng.png' %}" alt="Rabbit Hole Miku StcImg" width="13%" height="22%" />
-    <img src="{% static 'images/hmrh.gif' %}" alt="Rabbit Hole Miku StcGIF" width="16.8%" height="22%" />
-    <br />
-    <a href="test_app/miku">Miku Request</a>
-    <br />
-    <a href="test_app/formpage">Deja tu comentario :D!</a>
-    <br />
-    
-    <div class="section">
-        <h2>Registro de Accesos</h2>
-        {% if access_records %}
-            <ol>
-                {% for record in access_records %}
-                <li>
-                    {{record.webname}} - {{record.date}}
-                </li>
-                {% endfor %}
-            </ol>
+    <!--<div class="section">
+        <h2>VOCALOID Productores</h2>
+        {% if producers %}
+            {% for producer in producers %}
+                <div class="producer-container">
+                    <div class="producer-info">
+                        <h3>{{ producer.name }}</h3>
+                        <p><strong>País:</strong> {{ producer.country }}</p>
+                        <p><strong>Género(s):</strong> {{ producer.genre }}</p>
+                        <p><strong>Canción Más Reciente:</strong> {{ producer.last_song }}</p>
+                        <p><strong>Canción Más Popular:</strong> {{ producer.popular_song }}</p>
+                        <p><strong>Status:</strong> {{ producer.status }}</p>
+                    </div>
+                    <div class="producer-image">
+                        <img src="{% static 'img/mikuico.png' %}" alt="{{ producer.name }}">
+                    </div>
+                    <div class="producer-social">
+                        <h4>Redes Sociales</h4>
+                        <ul>
+                            {% if producer.twitter_username %}
+                                <li><a href="{{ producer.twitter_link }}"><img src="{% static 'img/twitter.svg' %}"> Twitter</a></li>
+                            {% endif %}
+                            {% if producer.youtube_channel_id %}
+                                <li><a href="{{ producer.youtube_link }}"><img src="{% static 'img/youtube.svg' %}"> YouTube</a></li>
+                            {% endif %}
+                            {% if producer.niconico_user_id %}
+                                <li><a href="{{ producer.niconico_link }}"><img src="{% static 'img/nnd.svg' %}"> Nico Nico Douga</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
         {% else %}
-            <p>Pablito Clavo un Clavito y se sento y se pego</p>
+            <p>¡No hay productores aquí! ⊙﹏⊙∥</p>
+        {% endif %}
+    </div>-->
+    <br><br>
+    <div class="container">
+        <h2>VOCALOID Productores</h2>
+        <br />
+        {% if producers %}
+            {% for producer in producers %}
+                <div class="row">
+                    <div class="col-lg-4 mx-autos bor">
+                        <h3>{{ producer.name }}</h3>
+                        <br>
+                        <p><strong>País:</strong> {{ producer.country }}</p>
+                        <p><strong>Género(s):</strong> {{ producer.genre }}</p>
+                        <p><strong>Canción Más Reciente:</strong> {{ producer.last_song }}</p>
+                        <p><strong>Canción Más Popular:</strong> {{ producer.popular_song }}</p>
+                        <p><strong>Status:</strong> {{ producer.status }}</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <img class="img-fluid borimg" src="{{ producer.picture_link }}" alt="{{ producer.name }}">
+                    </div>
+                    <div class="col-lg-4 text-center mx-auto bor">
+                        <h4>Redes Sociales</h4>
+                            <br>
+                            {% if producer.twitter_username %}
+                                <a class="padd text-center" href="{{ producer.twitter_link }}"><img class="icon icon-twitter" src="{% static 'img/twitter-light.svg' %}"></a>
+                            {% endif %}
+                            {% if producer.youtube_channel_id %}
+                                <a class="padd" href="{{ producer.youtube_link }}"><img class="icon icon-youtube" src="{% static 'img/youtube-light.svg' %}"></a>
+                            {% endif %}
+                            {% if producer.niconico_user_id %}
+                                <a class="padd" href="{{ producer.niconico_link }}"><img class="icon icon-niconico" src="{% static 'img/nnd-light.svg' %}"></a>
+                            {% endif %}
+                    </div>
+                </div>
+                <br><br>
+            {% endfor %}
+        {% else %}
+            <p>No Producers Here dude! ⊙﹏⊙∥</p>
         {% endif %}
     </div>
-    <br />
-    <div class="section">
-        <h2>UwU Team</h2>
-        {% if uwuteam %}
-            <table class="table">
-                <thead>
-                    <th>Primer Nombre</th>
-                    <th>Primer Apellido</th>
-                    <th>Email</th>
-                    <th>Teléfono</th>
-                    <th>URL</th>
-                </thead>
-                <tbody>
-                    {% for integrante in uwuteam %}
-                        <tr>                        
-                            <td>{{integrante.f_name}}</td>
-                            <td>{{integrante.l_name}}</td>
-                            <td>{{integrante.email}}</td>
-                            <td>{{integrante.phone}}</td>
-                            <td><a href="test_app/usuario{{integrante.f_name}}">Test App</a></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>Habia una vez una vidrieria, y quebro</p>
-        {% endif %}
-    </div>
+    <br><br>
 
     {% endblock %}
 <!--

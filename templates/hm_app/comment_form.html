@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 {% extends "hm_app/base.html" %}
+{% load static %}
+
+{% block title %}Comentarios - Crypton Future Media{% endblock %}
+{% block nav_contact_active %}active{% endblock %}
+
 {% block body_block %}
 
 <!--<html lang="en">
@@ -13,12 +18,19 @@
 <body>
     <div class="container">
         **!--{{form.as_p}}-->
-        
-        <form method="POST">
-            {{form.as_p}}
-            {% csrf_token %}
-            <input type="submit" class="btn btn-primary" value="Submit"/>
-        </form>
+        <br><br>
+        <div class="container container h-100">
+            <div class="row h-100">
+              <div class="col-md-6 mx-auto">
+                <form class="form-row mw-100" method="POST">
+                    {{form.as_p}}
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary justify-content-md-center" value="Submit"/>
+                </form>
+              </div>
+            </div>
+        </div>
+        <br><br>
 
 {% endblock %}
 <!--

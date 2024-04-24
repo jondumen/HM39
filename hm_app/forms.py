@@ -1,13 +1,17 @@
 from django import forms
 from django.core import validators
-from hm_app.models import Comments
 
 #Con ModelForm
-class FormUser(forms.ModelForm):
-    #Campos Personalizados
-
-    class Meta:
-        model = Comments
-        #fields = "__all__"
-        #fields = ('topic',)
-        exclude = ('topic',)
+class FormUser(forms.Form):
+    name = forms.CharField(validators=[validators.MaxLengthValidator(50)])
+    email = forms.EmailField()
+    text = forms.CharField(widget=forms.Textarea)
+    catchbots = forms.CharField(required=False,
+                                widget=forms.HiddenInput)
+    
+    #Funcion para verificar que los datos en "Catchbots" estan bien
+    def clean_catchbots(self):
+        catcher = self.cleaned_data['catchbots']
+        if (len(catcher)>0):
+            raise forms.ValidationError("Vaya, vaya Un botcito se esta portando mal hoy")
+        return catcher

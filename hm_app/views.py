@@ -6,7 +6,10 @@ from . import forms
 def index(request):
 	comm = Comments.objects.order_by('name')
 	prod = Producer.objects.order_by('name')
-	my_context = {'username': 'Hana dice Hola desde Views.py',}
+	print(prod)
+	my_context = {'username': 'Hana dice Hola desde Views.py',
+			   #'producers': prod
+	  }
 	return render(request, 'hm_app/index.html', context=my_context)
 
 #Crear un formulario para mostrar
@@ -28,4 +31,5 @@ def comment_form(request):
 	return render(request, 'hm_app/comment_form.html', {'form' : form})
 
 def producers(request):
-	return render(request, 'hm_app/producers.html')
+    prod = Producer.objects.order_by('name')
+    return render(request, 'hm_app/producers.html', {'producers': prod})

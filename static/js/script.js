@@ -13,5 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Cambia el tema
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         htmlElement.setAttribute('data-bs-theme', newTheme);
+
+        // Cambia las clases de los iconos
+        const icons = document.querySelectorAll('.icon');
+        icons.forEach(icon => {
+            if (newTheme === 'light') {
+                icon.classList.add('white-icon');
+            } else {
+                icon.classList.remove('white-icon');
+            }
+        });
     });
 });
